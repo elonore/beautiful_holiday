@@ -9,17 +9,17 @@ require('./inc/head.php');
         header('Location:index.php');
     }
     if (isset($_POST['submit-login'])) {
-        $user_email = htmlspecialchars($_POST['user_email']);
-        $user_pass = htmlspecialchars($_POST['user_password']);
-        $sql = $db->query("SELECT * FROM users WHERE user_email = '$user_email'");
+        $email = htmlspecialchars($_POST['email']);
+        $user_pass = htmlspecialchars($_POST['password']);
+        $sql = $db->query("SELECT * FROM users WHERE email = '$email'");
         if ($row = $sql->fetch()) {
             $db_id = $row['id'];
-            $db_email = $row['user_mail'];
-            $db_pass = $row['user_password'];
+            $db_email = $row['email'];
+            $db_pass = $row['password'];
             if (password_verify($user_pass, $db_pass)) {
                 $_SESSION['id'] = $db_id;
-                $_SESSION['user_email'] = $db_email;
-                $_SESSION['user_password'] = $db_pass;
+                $_SESSION['email'] = $db_email;
+                $_SESSION['password'] = $db_pass;
 
                 $_SESSION['flash'] = "Welcome to House Swaps, you're now logged in";
                 header("Location:index.php");
@@ -34,8 +34,8 @@ require('./inc/head.php');
 <!-- Login form to send data to the database -->
 <div class="text-center">
         <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" class="login-form">
-            <input class="formheadconnect" type="text" name="user_email" class="formcontrol id=" exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your email...">
-            <input class="formheadconnect2" type="password" name="user_password" class="formcontrol" id="exampleInputPassword1" placeholder="Enter your password...">
+            <input class="formheadconnect" type="text" name="email" class="formcontrol id=" exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your email...">
+            <input class="formheadconnect2" type="password" name="password" class="formcontrol" id="exampleInputPassword1" placeholder="Enter your password...">
             <button type="submit" name="submit-login" class="myButton1">Connexion</button>
         </form>
 

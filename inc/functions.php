@@ -21,11 +21,11 @@ function isLoggedIn()
 }
 
 
-//faire la fonction displaywines avec toutes les bouteilles et avec user et utilisdateur //
-function displayhouses()
+//faire la fonction displayproperties avec toutes les propriétés et avec user et utilisdateur //
+function displayproperties()
 {
     global $db;
-    $sql = $db->query("SELECT * FROM houses");
+    $sql = $db->query("SELECT * FROM properties");
     $sql->setFetchMode(PDO::FETCH_ASSOC);
 
     while ($row = $sql->fetch()) {
@@ -37,24 +37,29 @@ function displayhouses()
                     <h6><?php echo $row['name']; ?></h6>
                     <br>
                     <p>Year : <?php echo $row['year']; ?></p>
-                    <p>Category : <?php echo $row['category']; ?></p>
-                    <p>Country : <?php echo $row['country']; ?></p>
-                    <p>Region : <?php echo $row['region']; ?></p>
                     <p>Description: <?php echo $row['description']; ?></p>
+                    <p>Category : <?php echo $row['category_id']; ?></p>
+                    <p>Address: <?php echo $row['address']; ?></p>
+                    <p>Country: <?php echo $row['country_id']; ?></p>
+                    <p>City : <?php echo $row['city_id']; ?></p>
+                    <p>Region : <?php echo $row['region_id']; ?></p>
+                    <p>Comment: <?php echo $row['comment_id']; ?></p>
+                    <p>User: <?php echo $row['user_id']; ?></p>
+                   
                     <img src="assets/uploads/<?php echo $row['image']; ?>" class="im-fluid" alt="photo" width="250" height="300">
                 </div>
 
                 <br>
 
                 <?php
-                if (isset($_SESSION['mail']) && ($_SESSION['password'])) {
+                if (isset($_SESSION['email']) && ($_SESSION['password'])) {
                     $id = $_SESSION['id'];
                 ?>
                     <div class="text-center">
-                        <a class="myButton1" href="display_onehouse.php?id=<?php echo $row['id']; ?>">Voir</a>
-                        <a class="myButton1" href="edit_house.php?id=<?php echo $row['id']; ?>">Modifier</a>
-                        <a class="myButton1" href="add_house.php?id=<?php echo $row['id']; ?>">Ajouter</a>
-                        <a class="myButton1" href="delete_house_post.php?id=<?php echo $row['id']; ?>">Supprimer</a>
+                        <a class="myButton1" href="display_oneproperty.php?id=<?php echo $row['id']; ?>">See</a>
+                        <a class="myButton1" href="edit_property.php?id=<?php echo $row['id']; ?>">Edit</a>
+                        <a class="myButton1" href="add_property.php?id=<?php echo $row['id']; ?>">Add</a>
+                        <a class="myButton1" href="delete_property_post.php?id=<?php echo $row['id']; ?>">Delete</a>
                     </div>
             </div>
         </div>
@@ -62,7 +67,7 @@ function displayhouses()
                 } else {
     ?>
                     <div class="text-center">
-                    <a class="myButton1" href="display_onehouse.php?id=<?php echo $row['id']; ?>">Voir</a>
+                    <a class="myButton1" href="display_oneproperty.php?id=<?php echo $row['id']; ?>">Voir</a>
             </div>
         </div>
         </div>

@@ -5,24 +5,24 @@ require('./inc/head.php');
 if (isset($_POST['submit-signup'])){
     $firstname = htmlspecialchars($_POST['firstname']);
     $lastname = htmlspecialchars($_POST['lastname']);
-    $mail = htmlspecialchars($_POST['mail']);
+    $email = htmlspecialchars($_POST['email']);
     $password1 = htmlspecialchars($_POST['password1']);
     $password2 = htmlspecialchars($_POST['password2']);
 
-    if($sql = $db->query("SELECT * FROM users WHERE user_email = '$mail'")){
+    if($sql = $db->query("SELECT * FROM users WHERE email = '$email'")){
         $compteur = $sql->rowCount();
         if($compteur != 0){
             $message = "<div class ='alert1'> Il y a déja un compte possédant cet e-mail </div>";
-        }elseif(!empty($mail) && !empty($mail)){
+        }elseif(!empty($email) && !empty($email)){
             if($password1 == $password2){
                 $password1 = password_hash($password1, PASSWORD_DEFAULT);
-                $sth = $db->prepare("INSERT INTO users (user_firstname, user_lastname, user_email, user_password,user_type) VALUES (:firstname, :lastname, :mail, :password1,:type)");
+                $sth = $db->prepare("INSERT INTO users (firstname, lastname, email, password, user_type) VALUES (:firstname, :lastname, :email, :password1, :user_type)");
 
                 $sth->bindValue(':firstname',$firstname);
                 $sth->bindValue(':lastname',$lastname);
-                $sth->bindValue(':mail',$mail);
+                $sth->bindValue(':email',$email);
                 $sth->bindValue(':password1',$password1);
-                $sth->bindValue(':type',1);
+                $sth->bindValue(':user_type', 1);
 
                 
                 if($sth->execute()){
@@ -69,7 +69,7 @@ if (isset($_POST['submit-signup'])){
       <input type="text" placeholder="Enter your last name" name="lastname" required>
 
       <label for="email"><b>Email</b></label>
-      <input type="text" placeholder="Enter Email" name="mail" required>
+      <input type="text" placeholder="Enter Email" name="email" required>
 
       <label for="password"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="password1" required>

@@ -22,7 +22,7 @@
         <div class="row">  
         </div>
         <div class="row justify-content-center">
-            <?= displayhouses(); ?>
+            <?= displayproperties(); ?>
         </div>
     </div>
 </section>
