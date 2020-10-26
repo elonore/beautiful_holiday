@@ -22,10 +22,17 @@ function isLoggedIn()
 
 
 //faire la fonction displayproperties avec toutes les propriétés et avec user et utilisdateur //
+// $sql = $db->query(SELECT * FROM house LEFT JOIN city ON house.city_id = city.id LEFT JOIN region ON house.region_id = region.id LEFT JOIN
+// comment ON house.comment_id = comment.id LEFT JOIN user ON house.user_id = user.id);
+
+
+
+
+
 function displayproperties()
 {
     global $db;
-    $sql = $db->query("SELECT * FROM properties");
+    $sql = $db->query("SELECT * FROM properties LEFT JOIN categories on properties.category_id = categories.id LEFT JOIN countries on properties.country_id = countries.id LEFT JOIN users ON properties.user_id = users.id LEFT JOIN regions on properties.region_id = regions.id LEFT JOIN cities on properties.city_id = cities.id   ");
     $sql->setFetchMode(PDO::FETCH_ASSOC);
 
     while ($row = $sql->fetch()) {
@@ -38,14 +45,12 @@ function displayproperties()
                     <br>
                     <p>Year : <?php echo $row['year']; ?></p>
                     <p>Description: <?php echo $row['description']; ?></p>
-                    <p>Category : <?php echo $row['category_id']; ?></p>
+                    <p>Category : <?php echo $row['category_name']; ?></p>
                     <p>Address: <?php echo $row['address']; ?></p>
-                    <p>Country: <?php echo $row['country_id']; ?></p>
-                    <p>City : <?php echo $row['city_id']; ?></p>
-                    <p>Region : <?php echo $row['region_id']; ?></p>
-                    <p>Comment: <?php echo $row['comment_id']; ?></p>
-                    <p>User: <?php echo $row['user_id']; ?></p>
-                   
+                    <p>Country: <?php echo $row['country_name']; ?></p>
+                    <p>City : <?php echo $row['city_name']; ?></p>
+                    <p>Region : <?php echo $row['region_name']; ?></p>
+
                     <img src="assets/uploads/<?php echo $row['image']; ?>" class="im-fluid" alt="photo" width="250" height="300">
                 </div>
 

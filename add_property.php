@@ -14,7 +14,7 @@ require ('inc/head.php');
                     </div>
                     <div class="form-group col-6">
                         <label for="year">Year: </label>
-                        <input type="date" id="year" name="year">
+                        <input type="text" id="year" name="year">
                     </div>
                     <div class="form-group col-6">
                     <label for="description">Description: </label>
@@ -28,6 +28,7 @@ require ('inc/head.php');
                                 <option value="2">House</option>
                                 <option value="3" selected>Tiny House</option>
                                 <option value="4">Villa</option>
+                                <option value="5">Wooden Hut</option>
                             </select>
                     </div>
                     <div class="form-group col-6">
@@ -51,13 +52,13 @@ require ('inc/head.php');
                             <select id="city" name="city">
                                 <option value="1">San Franciso</option>
                                 <option value="2">Odense</option>
-                                <option value="3" selected>Madrid</option>
+                                <option value="3" selected>Barcelona</option>
                                 <option value="4">Venice</option>
                                 <option value="5">Malmö</option>
                                 <option value="6">Reine</option>
                                 <option value="7">Marseille</option>
                                 <option value="8">Aix en Provence</option>
-                                <option value="9">Murano Island</option>
+                                <option value="9">Beaulieu</option>
                                 <option value="10">Copenhagen</option>
                                 <option value="11">Los Angeles</option>
                             </select>
@@ -72,16 +73,8 @@ require ('inc/head.php');
                                 <option value="5">Skåne</option>
                                 <option value="6">Lofoten Islands</option>
                                 <option value="7">Paca</option>
+                                <option value="8">Ardèche</option>
                             </select>
-                    </div>
-                    <div class="form-group col-6">
-                    <label for="comment">Add your comment: </label>
-                        <textarea id="description" name="description" rows="4" cols="50">
-                        </textarea>
-                    </div>
-                    <div class="form-group col-6">
-                        <label for="user_id">Your name: </label>
-                        <input type="text" class="form-control" id="user" name="user" placeholder="your name">
                     </div>
                     <div class="form-group col-6">
                         <!-- <label for="6">Img</label> -->

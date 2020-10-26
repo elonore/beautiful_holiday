@@ -1,20 +1,19 @@
 <?php
 include('inc/header.php');
+require('inc/head.php');
 
 if(isset($_POST['submit-property'])){
         
         $name = htmlspecialchars($_POST['name']);
         $year = htmlspecialchars($_POST['year']);
         $description = htmlspecialchars($_POST['description']);
-        $category = htmlspecialchars($_POST['category_id']);
+        $category_id = htmlspecialchars($_POST['category']);
         $address = htmlspecialchars($_POST['address']);
-        $country_id = htmlspecialchars($_POST['country_id']);
-        $city_id = htmlspecialchars($_POST['city_id']);
-        $region_id = htmlspecialchars($_POST['region_id']);
-        $comment_id = htmlspecialchars($_POST['comment_id']);
-        $user_id = htmlspecialchars($_POST['user_id']);
-        $file= $_FILES['images'];
-        $id = ($_SESSION['property_id']);
+        $country_id = htmlspecialchars($_POST['country']);
+        $city_id = htmlspecialchars($_POST['city']);
+        $region_id = htmlspecialchars($_POST['region']);
+        $file= $_FILES['image'];
+        $id = ($_SESSION['id']);
         
 
         if($file['size'] <= 1000000){
@@ -31,21 +30,20 @@ if(isset($_POST['submit-property'])){
 
         
             if($move_result){
-                $sth = $db->prepare("INSERT INTO properties(name,year,description,category_id,address, country_id,city_id,region_id,comment_id,user_id,image) VALUES (:name, :year, :description, :category_id, :address, :country_id, :city_id, :region_id, :comment_id, :user_id, :image)
+                $sth = $db->prepare("INSERT INTO properties(name,year,description,category_id,address, country_id,city_id,region_id,user_id,image) VALUES (:name, :year, :description, :category, :address, :country, :city, :region,:user_id, :image)
                 ");
               $sth->bindValue(':name',$name);
               $sth->bindValue(':year',$year);
               $sth->bindValue(':description',$description);
-              $sth->bindValue(':category_id',$category);
+              $sth->bindValue(':category',$category_id);
               $sth->bindValue(':address',$address);
-              $sth->bindValue(':country_id',$country_id);
-              $sth->bindValue(':city_id',$city_id);
-              $sth->bindValue(':region_id',$region_id);
-              $sth->bindValue(':comment_id',$comment_id);
-              $sth->bindValue(':user_id',$user_id);
+              $sth->bindValue(':country',$country_id);
+              $sth->bindValue(':city',$city_id);
+              $sth->bindValue(':region',$region_id);
+              $sth->bindValue(':user_id',$id);
               $sth->bindValue(':image',$imgname);
-                $sth->execute();
-                header('Location: index.php');
+              $sth->execute();
+              header('Location: index.php');
 
 
                 }

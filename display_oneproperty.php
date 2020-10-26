@@ -2,6 +2,7 @@
 <?php
     $page='display_oneproperty.php';
     require('inc/header.php');
+    require('inc/head.php');
 ?>
 
 <?php
@@ -13,13 +14,15 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
     // On nettoie l'id envoyé
     $id = strip_tags($_GET['id']);
 
-    $sql = 'SELECT * FROM `properties` WHERE `property_id` = :property_id;';
+     $sql = 'SELECT * FROM `properties` WHERE `id` = :id;';
+
+    // $sql = 'SELECT * FROM properties LEFT JOIN categories on properties.category_id = categories.id LEFT JOIN countries on properties.country_id = countries.id LEFT JOIN users ON properties.user_id = users.id LEFT JOIN regions on properties.region_id = regions.id LEFT JOIN cities on properties.city_id = cities.id';
 
     // On prépare la requête
     $query = $db->prepare($sql);
 
     // On "accroche" les paramètre (id)
-    $query->bindValue(':property_id', $property_id, PDO::PARAM_INT);
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
 
     // On exécute la requête
     $query->execute();
@@ -46,14 +49,12 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
                 <p>Name : <?= $row['name'] ?></p>
                 <p>Year : <?= $row['year'] ?></p>
                 <p>Description : <?= $row['description'] ?></p>
-                <p>Category : <?= $row['category'] ?></p>
+                <p>Category : <?= $row['category_id'] ?></p>
                 <p>Address : <?= $row['address'] ?></p>
                 <p>Country : <?= $row['country_id'] ?></p>
                 <p>City : <?= $row['city_id'] ?></p>
                 <p>Region : <?= $row['region_id'] ?></p>
-                <p>Comment : <?= $row['comment_id'] ?></p>
-                <p>User : <?= $row['user_id'] ?></p>
-                <img src="assets/uploads/<?php echo $row['image'];?>" alt="photo" width="250" height="300">
+                <img src="assets/uploads/<?php echo $row['image'];?>" alt="photo" width="450" height="450">
                 <div class="center">
                     <a class="myButton1" href="index.php?id=<?php echo $row['id'];?>">Back to the homepage</a>
                 </div>
